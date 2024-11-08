@@ -18,17 +18,21 @@ public class BaseSystemCalculator_Layout extends JFrame {
     private JTextField Current_Base_System, Target_Radix_System;
     private JTextField First_Radix_System, Second_Base_System, Result_Radix_System;
 
-    private final String FirstColorCode = "#BBBBBB";
-    Font fontBigSize = new Font("arial", Font.BOLD, 30);
+    private final String FirstColorCode = "#243642";
+    private final String SecondColorCode = "#387478";
+    private final String ThirdColorCode = "#629584";
+    private final String FourthColorCode = "#E2F1E7";
+
+    Font fontBigSize = new Font("arial", Font.BOLD, 32);
     Font fontSmallSize = new Font("arial", Font.BOLD, 16);
 
     public BaseSystemCalculator_Layout(String title) {
         this.setTitle(title);
         addControls();
         addEvents();
-        ImageIcon icon = new ImageIcon("Data/Logo-icon.png"); // Đảm bảo đường dẫn chính xác
+        URL imageUrl = getClass().getResource("/resources/Logo-icon.png");
+        ImageIcon icon = new ImageIcon(imageUrl);
         Image image = icon.getImage();
-
         setIconImage(image);
     }
 
@@ -82,8 +86,8 @@ public class BaseSystemCalculator_Layout extends JFrame {
 
         lblChuyenDoi = new JLabel("CHUYỂN ĐỔI HỆ CƠ SỐ");
         lblChuyenDoi.setFont(fontBigSize);
-        lblChuyenDoi.setForeground(Color.BLACK);
-        lblChuyenDoi.setBounds(100, 40, 400, 30);
+        lblChuyenDoi.setForeground(Color.decode(SecondColorCode));
+        lblChuyenDoi.setBounds(90, 10, 400, 50);
         panel1.add(lblChuyenDoi);
 
         Number_One_Layout_One = new JTextField();
@@ -95,22 +99,19 @@ public class BaseSystemCalculator_Layout extends JFrame {
         Current_Base_System = createPlaceholderTextField("2-36");
         createLabel(panel1, "HỆ CƠ SỐ HIỆN TẠI", 100, 130);
         Current_Base_System.setBounds(20, 130, 70, 30);
-        Current_Base_System.setBackground(Color.decode(FirstColorCode));
         panel1.add(Current_Base_System);
 
         Target_Radix_System = new JTextField();
         Target_Radix_System = createPlaceholderTextField("2-36");
         createLabel(panel1, "HỆ CƠ SỐ CẦN CHUYỂN", 100, 170);
         Target_Radix_System.setBounds(20, 170, 70, 30);
-        Target_Radix_System.setBackground(Color.decode(FirstColorCode));
         panel1.add(Target_Radix_System);
 
         ketQuaField_Layout_One = new JTextField();
-        ketQuaField_Layout_One = createPlaceholderTextField("SỐ SAU KHI ĐÃ CHUYỂN");
+        ketQuaField_Layout_One = createPlaceholderTextField("KẾT QUẢ CHUYỂN ĐỔI");
         ketQuaField_Layout_One.setBounds(20, 210, 320, 40);
         ketQuaField_Layout_One.setEditable(false);
         ketQuaField_Layout_One.setFont(new Font("Arial", Font.BOLD, 19));
-        ketQuaField_Layout_One.setBackground(Color.decode(FirstColorCode));
         panel1.add(ketQuaField_Layout_One);
 
         JSeparator separator1 = new JSeparator();
@@ -119,21 +120,29 @@ public class BaseSystemCalculator_Layout extends JFrame {
 
         BtConvert = new JButton("Chuyển đổi");
         BtConvert.setBounds(100, 280, 130, 30);
-        BtConvert.setBackground(Color.decode(FirstColorCode));
+        BtConvert.setBackground(Color.decode(SecondColorCode));
+        BtConvert.setForeground(Color.WHITE);
         BtConvert.setFont(fontSmallSize);
         BtConvert.setFocusPainted(false);
         panel1.add(BtConvert);
 
         BtReset_Layout_One = new JButton("Thiết Lập lại");
         BtReset_Layout_One.setBounds(320, 280, 130, 30);
-        BtReset_Layout_One.setBackground(Color.decode(FirstColorCode));
+        BtReset_Layout_One.setBackground(Color.decode(SecondColorCode));
+        BtReset_Layout_One.setForeground(Color.WHITE);
         BtReset_Layout_One.setFont(fontSmallSize);
         BtReset_Layout_One.setFocusPainted(false);
         panel1.add(BtReset_Layout_One);
+
+        lblBanQuyen = new JLabel("PHẦN MỀM ĐƯỢC VIẾT BỞI DLP TEAM");
+        lblBanQuyen.setFont(fontSmallSize);
+        lblBanQuyen.setForeground(Color.BLACK);
+        lblBanQuyen.setBounds(120, 500, 550, 130);
+        panel1.add(lblBanQuyen);
         add(panel1);
 
         try {
-            ImageIcon originalIcon = new ImageIcon(new URL("https://i.imgur.com/Ge5XtVz.png"));
+            ImageIcon originalIcon = new ImageIcon(getClass().getResource("/resources/Logo-DLP.png"));
             Image originalImage = originalIcon.getImage();
 
             int originalWidth = originalImage.getWidth(null);
@@ -163,11 +172,10 @@ public class BaseSystemCalculator_Layout extends JFrame {
         panel2.setBackground(Color.WHITE);
         DefaultListCellRenderer renderer = new DefaultListCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
-
         lblCalculate = new JLabel("PHÉP TÍNH HỆ CƠ SỐ");
         lblCalculate.setFont(fontBigSize);
-        lblCalculate.setForeground(Color.BLACK);
-        lblCalculate.setBounds(100, 20, 400, 30);
+        lblCalculate.setForeground(Color.decode(SecondColorCode));
+        lblCalculate.setBounds(110, 10, 400, 50);
         panel2.add(lblCalculate);
 
         Number_One_Layout_Two = new JTextField();
@@ -179,34 +187,30 @@ public class BaseSystemCalculator_Layout extends JFrame {
         First_Radix_System = createPlaceholderTextField("2-36");
         createLabel(panel2, "HỆ CƠ SỐ SỐ THỨ NHẤT", 230, 110);
         First_Radix_System.setBounds(380, 110, 70, 30);
-        First_Radix_System.setBackground(Color.decode(FirstColorCode));
         panel2.add(First_Radix_System);
 
-        Operation = new JComboBox<>(new String[] { "+", "-", "*", "/" });
+        Operation = new JComboBox<>(new String[]{"+", "-", "*", "/"});
         createLabel(panel2, "CHỌN PHÉP TÍNH", 210, 150);
         Operation.setBounds(130, 150, 70, 30);
-        Operation.setBackground(Color.decode(FirstColorCode));
         Operation.setRenderer(renderer);
+        Operation.setBackground(Color.decode(FourthColorCode));
         panel2.add(Operation);
 
         Number_Two_Layout_Two = new JTextField();
         Number_Two_Layout_Two = createPlaceholderTextField("NHẬP SỐ THỨ HAI");
         Number_Two_Layout_Two.setBounds(130, 235, 320, 40);
-        Number_Two_Layout_Two.setBackground(Color.decode(FirstColorCode));
         panel2.add(Number_Two_Layout_Two);
 
         Second_Base_System = new JTextField(3);
         createLabel(panel2, "HỆ CƠ SỐ SỐ THỨ HAI", 240, 190);
         Second_Base_System = createPlaceholderTextField("2-36");
         Second_Base_System.setBounds(380, 190, 70, 30);
-        Second_Base_System.setBackground(Color.decode(FirstColorCode));
         panel2.add(Second_Base_System);
 
         Result_Radix_System = new JTextField(3);
         createLabel(panel2, "HỆ CƠ SỐ CỦA KẾT QUẢ", 230, 290);
         Result_Radix_System = createPlaceholderTextField("2-36");
         Result_Radix_System.setBounds(380, 290, 70, 30);
-        Result_Radix_System.setBackground(Color.decode(FirstColorCode));
         panel2.add(Result_Radix_System);
 
         ketQuaField_Layout_Two = new JTextField();
@@ -214,20 +218,21 @@ public class BaseSystemCalculator_Layout extends JFrame {
         ketQuaField_Layout_Two.setBounds(130, 340, 320, 40);
         ketQuaField_Layout_Two.setEditable(false);
         ketQuaField_Layout_Two.setFont(new Font("Arial", Font.BOLD, 19));
-        ketQuaField_Layout_Two.setBackground(Color.decode(FirstColorCode));
         // ketQuaField_Layout_Two.setForeground(Color.BLACK);
         panel2.add(ketQuaField_Layout_Two);
 
         BtCalculate = new JButton("Tính Toán");
         BtCalculate.setBounds(100, 390, 120, 30);
-        BtCalculate.setBackground(Color.decode(FirstColorCode));
+        BtCalculate.setBackground(Color.decode(SecondColorCode));
+        BtCalculate.setForeground(Color.WHITE);
         BtCalculate.setFont(fontSmallSize);
         BtCalculate.setFocusPainted(false);
         panel2.add(BtCalculate);
 
         BtReset_Layout_Two = new JButton("Thiết Lập lại");
         BtReset_Layout_Two.setBounds(320, 390, 130, 30);
-        BtReset_Layout_Two.setBackground(Color.decode(FirstColorCode));
+        BtReset_Layout_Two.setBackground(Color.decode(SecondColorCode));
+        BtReset_Layout_Two.setForeground(Color.WHITE);
         BtReset_Layout_Two.setFont(fontSmallSize);
         BtReset_Layout_Two.setFocusPainted(false);
         panel2.add(BtReset_Layout_Two);
@@ -238,9 +243,9 @@ public class BaseSystemCalculator_Layout extends JFrame {
 
         // Thêm logo
         try {
-            ImageIcon originalIcon = new ImageIcon(new URL("https://i.imgur.com/Ge5XtVz.png"));
-            Image originalImage = originalIcon.getImage();
 
+            ImageIcon originalIcon = new ImageIcon(getClass().getResource("/resources/Logo-DLP.png"));
+            Image originalImage = originalIcon.getImage();
             int originalWidth = originalImage.getWidth(null);
             int originalHeight = originalImage.getHeight(null);
 
@@ -251,7 +256,7 @@ public class BaseSystemCalculator_Layout extends JFrame {
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
             JLabel logoLabel = new JLabel(scaledIcon);
-            logoLabel.setBounds(200, 440, newWidth, newHeight);
+            logoLabel.setBounds(200, 400, newWidth, newHeight);
             panel2.add(logoLabel);
         } catch (Exception e) {
             e.printStackTrace();
@@ -261,7 +266,7 @@ public class BaseSystemCalculator_Layout extends JFrame {
         lblBanQuyen = new JLabel("PHẦN MỀM ĐƯỢC VIẾT BỞI DLP TEAM");
         lblBanQuyen.setFont(fontSmallSize);
         lblBanQuyen.setForeground(Color.BLACK);
-        lblBanQuyen.setBounds(110, 500, 550, 130);
+        lblBanQuyen.setBounds(120, 500, 550, 130);
         panel2.add(lblBanQuyen);
         add(panel2);
         return panel2;
@@ -274,33 +279,39 @@ public class BaseSystemCalculator_Layout extends JFrame {
             button1.setFont(fontSmallSize);
             button1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
             button1.setFocusPainted(false);
+            button1.setForeground(Color.decode(ThirdColorCode));
 
-            button2.setBackground(Color.WHITE);
+            button2.setBackground(Color.decode(FourthColorCode));
             button2.setFont(fontSmallSize);
             button2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             button2.setFocusPainted(false);
+            button2.setForeground(Color.decode(ThirdColorCode));
 
         } else if ("Panel 2".equals(currentPanel)) {
-            button1.setBackground(Color.WHITE);
+            button1.setBackground(Color.decode(FourthColorCode));
             button1.setFont(fontSmallSize);
             button1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
             button1.setFocusPainted(false);
+            button1.setForeground(Color.decode(ThirdColorCode));
 
             button2.setBackground(Color.WHITE);
             button2.setFont(fontSmallSize);
             button2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            button2.setForeground(Color.decode(ThirdColorCode));
+
         }
     }
 
     private JTextField createPlaceholderTextField(String placeholder) {
         PlaceholderTextField textField = new PlaceholderTextField(placeholder, fontSmallSize);
-        textField.setBackground(Color.decode(FirstColorCode));
+        textField.setBackground(Color.decode(FourthColorCode));
         return textField;
     }
 
     private void createLabel(JPanel panel, String text, int x, int y) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, 400, 30);
+        label.setForeground(Color.decode(SecondColorCode)); // Set the color of the text
         panel.add(label);
     }
 
@@ -400,8 +411,11 @@ public class BaseSystemCalculator_Layout extends JFrame {
         Target_Radix_System.setText("");
         Current_Base_System.setText("2-36");
         Target_Radix_System.setText("2-36");
-        ketQuaField_Layout_One.setText("SỐ ĐÃ CHUYỂN");
+        ketQuaField_Layout_One.setText("KẾT QUẢ CHUYỂN ĐỔI");
         ketQuaField_Layout_One.setForeground(Color.GRAY);
+
+        resetPlaceholder(Current_Base_System);
+        resetPlaceholder(Target_Radix_System);
 
     }
 
